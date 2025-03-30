@@ -4,8 +4,9 @@ import org.project.Services.*;
 import org.project.Entities.Identity.*;
 import org.project.DataStorage.dataStorage;
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class userService implements service_interface<user> {
+public class userService implements service_interface<user>, searchService_interface<user> {
 
     private final dataStorage dataStorage;
 
@@ -41,6 +42,18 @@ public class userService implements service_interface<user> {
         for (account account: dataStorage.Accounts){
             if (account instanceof user){
                 all.add((user)account);
+            }
+        }
+        return all;
+    }
+
+    public ArrayList<user> getBySearch(String search) {
+        ArrayList<user> all = new ArrayList<>();
+        for (account account: dataStorage.Accounts){
+            if (account instanceof user){
+                if (Objects.equals(search, account.getName())){
+                    all.add((user)account);
+                }
             }
         }
         return all;

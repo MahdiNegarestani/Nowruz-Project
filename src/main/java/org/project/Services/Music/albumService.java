@@ -4,8 +4,9 @@ import org.project.Services.*;
 import org.project.Entities.Music.*;
 import org.project.DataStorage.dataStorage;
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class albumService implements service_interface<album> {
+public class albumService implements service_interface<album>, searchService_interface<album> {
 
     dataStorage dataStorage;
 
@@ -36,5 +37,15 @@ public class albumService implements service_interface<album> {
 
     public ArrayList<album> getAll() {
         return new ArrayList<>(dataStorage.Albums);
+    }
+
+    public ArrayList<album> getBySearch(String search) {
+        ArrayList<album> all = new ArrayList<>();
+        for (album album: dataStorage.Albums){
+            if (Objects.equals(search, album.getTitle())){
+                all.add(album);
+            }
+        }
+        return all;
     }
 }

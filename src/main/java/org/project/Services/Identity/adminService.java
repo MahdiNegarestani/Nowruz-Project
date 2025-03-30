@@ -4,8 +4,9 @@ import org.project.Services.*;
 import org.project.Entities.Identity.*;
 import org.project.DataStorage.dataStorage;
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class adminService implements service_interface<admin> {
+public class adminService implements service_interface<admin>, searchService_interface<admin> {
 
     private final dataStorage dataStorage;
 
@@ -41,6 +42,18 @@ public class adminService implements service_interface<admin> {
         for (account account: dataStorage.Accounts){
             if (account instanceof admin){
                 all.add((admin) account);
+            }
+        }
+        return all;
+    }
+
+    public ArrayList<admin> getBySearch(String search) {
+        ArrayList<admin> all = new ArrayList<>();
+        for (account account: dataStorage.Accounts){
+            if (account instanceof admin){
+                if (Objects.equals(search, account.getName())){
+                    all.add((admin)account);
+                }
             }
         }
         return all;

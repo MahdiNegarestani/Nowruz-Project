@@ -1,11 +1,14 @@
 package org.project.Services.Music;
 
+import org.project.Entities.Identity.account;
+import org.project.Entities.Identity.admin;
 import org.project.Services.*;
 import org.project.Entities.Music.*;
 import org.project.DataStorage.dataStorage;
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class songService implements service_interface<song> {
+public class songService implements service_interface<song>, searchService_interface<song> {
 
     dataStorage dataStorage;
 
@@ -36,5 +39,15 @@ public class songService implements service_interface<song> {
 
     public ArrayList<song> getAll() {
         return new ArrayList<>(dataStorage.Songs);
+    }
+
+    public ArrayList<song> getBySearch(String search) {
+        ArrayList<song> all = new ArrayList<>();
+        for (song song: dataStorage.Songs){
+            if (Objects.equals(search, song.getTitle())){
+                all.add(song);
+            }
+        }
+        return all;
     }
 }
