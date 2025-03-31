@@ -1,13 +1,12 @@
 package org.project.Entities.Music;
 
 import org.project.Entities.entity;
-import org.project.enums.reactions;
+import org.project.Enums.reactions;
 
 public class comment_reaction extends entity {
     private String commentId;
     private String userId;
     private reactions reaction;
-
     public comment_reaction() {}
 
     public comment_reaction(String commentId, String userId, reactions reaction) {

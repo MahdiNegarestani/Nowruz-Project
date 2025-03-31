@@ -45,4 +45,6 @@ public class comment extends entity {
     }
 
     public LocalDateTime getReleaseDate() {return this.releaseDate;}
+
+    public void setReleaseDate(LocalDateTime releaseDate) {this.releaseDate = releaseDate;}
 }

@@ -2,21 +2,25 @@ package org.project.Entities.Identity;
 
 import org.project.Entities.entity;
 
+import org.project.Enums.*;
+
 public class account extends entity{
     protected String Name;
     protected String Username;
     protected String Password;
     protected String Email;
     protected int Age;
+    protected roles Role;
 
     public account() {}
 
-    public account(String name, String username, String password, String email, int age) {
+    public account(String name, String username, String password, String email, int age, roles role) {
         Name = name;
         Username = username;
         Password = password;
         Email = email;
         Age = age;
+        Role = role;
     }
 
     public String getName() {return this.Name;}
@@ -38,4 +42,6 @@ public class account extends entity{
     public void setPassword(String Password) {this.Password = Password;}
 
     public void setAge(int Age) {this.Age = Age;}
+
+    public roles getRole() {return this.Role;}
 }

@@ -1,4 +1,4 @@
-package org.project.enums;
+package org.project.Enums;
 
 public enum reactions {
    LIKE,
