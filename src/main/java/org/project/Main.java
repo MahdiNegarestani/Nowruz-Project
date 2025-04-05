@@ -1,17 +1,29 @@
-package org.example;
+package org.project;
+
+import java.util.Scanner;
+import org.project.Services.*;
+import org.project.Page.page_abstract.*;
+import org.project.Page.*;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+    static Scanner scanner;
+    static getServices services;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+    public static void configure(application app) {
+        scanner = new Scanner(System.in);
+        services = new getServices();
+        addRoutes(app);
+    }
+
+    private static void addRoutes(application app) {
+        app.getRouter().addRoute("Home",new HomePage(scanner, app.getRouter()));
+    }
+
+    public static void main(String[] args) {
+        application app = application.CreateDefault();
+        configure(app);
+        app.run();
     }
 }

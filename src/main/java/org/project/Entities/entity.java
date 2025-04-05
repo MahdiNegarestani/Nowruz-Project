@@ -1,13 +1,12 @@
 package org.project.Entities;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class entity {
     private String Id;
-    private LocalDateTime Created_at;
-    private LocalDateTime Modified_T;
+    private final LocalDateTime Created_at;
+    private final LocalDateTime Modified_T;
 
     public entity() {
         this.Id = UUID.randomUUID().toString();
