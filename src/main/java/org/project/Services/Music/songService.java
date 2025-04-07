@@ -5,8 +5,11 @@ import org.project.Entities.Identity.admin;
 import org.project.Services.*;
 import org.project.Entities.Music.*;
 import org.project.DataStorage.dataStorage;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.AbstractMap;
 
 public class songService implements service_interface<song>, searchService_interface<song> {
 
@@ -49,5 +52,19 @@ public class songService implements service_interface<song>, searchService_inter
             }
         }
         return all;
+    }
+
+    public ArrayList<AbstractMap.SimpleEntry<song, Integer>> listOfTopSongs() {
+        if (getAll() == null){return null;}
+        else {
+            ArrayList<AbstractMap.SimpleEntry<song, Integer>> pairs = new ArrayList<>();
+            for (song song: dataStorage.Songs){
+                pairs.add(new AbstractMap.SimpleEntry<>(song, song.getViewsCount()));
+            }
+            for (AbstractMap.SimpleEntry<song, Integer> pair: pairs){
+                System.out.println(pair.getKey().getTitle() + " with " + pair.getValue() + " views");
+            }
+            return pairs;
+        }
     }
 }

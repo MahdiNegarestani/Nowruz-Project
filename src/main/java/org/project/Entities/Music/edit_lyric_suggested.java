@@ -1,7 +1,7 @@
 package org.project.Entities.Music;
 
 import org.project.Entities.entity;
-import org.project.enums.edit_lyric_status;
+import org.project.Enums.edit_lyric_status;
 
 public class edit_lyric_suggested extends entity {
 

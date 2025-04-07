@@ -1,6 +1,8 @@
 package org.project.Services.Identity;
 
+import org.project.Entities.Music.song;
 import org.project.Services.*;
+import org.project.Services.Identity.artistService;
 import org.project.Entities.Identity.*;
 import org.project.DataStorage.dataStorage;
 import java.util.ArrayList;
@@ -9,15 +11,17 @@ import java.util.Objects;
 public class adminService implements service_interface<admin>, searchService_interface<admin> {
 
     private final dataStorage dataStorage;
+    private artistService artistService;
 
     public adminService(dataStorage dataStorage) {
         this.dataStorage = dataStorage;
+        this.artistService = new artistService(dataStorage);
     }
 
     public admin getById(String id) {
         for (account account: dataStorage.Accounts){
-            if (account instanceof user){
-                if (id == account.getUsername()){
+            if (account instanceof admin){
+                if (Objects.equals(id, account.getId())){
                     return (admin) account;
                 }
             }
@@ -57,5 +61,10 @@ public class adminService implements service_interface<admin>, searchService_int
             }
         }
         return all;
+    }
+
+    public void viewTheSong(song song) {
+        System.out.println("Title: " + song.getTitle() + "\nGenre: " + song.getGenre() + "\nArtist_Name: " + artistService.getById(song.getArtistId()).getName() + "\nLyric: " + song.getLyrics());
+        song.incrementViewsCount();
     }
 }

@@ -1,17 +1,22 @@
 package org.project.Services.Music;
 
+import java.time.LocalDateTime;
 import org.project.Services.*;
+import org.project.Services.Identity.userService;
 import org.project.Entities.Music.*;
 import org.project.DataStorage.dataStorage;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.AbstractMap;
 
 public class commentService implements service_interface<comment>, searchService_interface<comment> {
 
-    dataStorage dataStorage;
+    private dataStorage dataStorage;
+    private userService userService;
 
     public commentService(dataStorage dataStorage) {
         this.dataStorage = dataStorage;
+        this.userService = new userService(dataStorage);
     }
 
     public comment getById(String id) {
@@ -47,5 +52,26 @@ public class commentService implements service_interface<comment>, searchService
             }
         }
         return all;
+    }
+
+    public void viewingComments(song song) {
+        ArrayList<comment> temp = null;
+        for (comment comment: getAll()){
+            if (comment.getSongId().equals(song.getId())){
+                temp.add(comment);
+            }
+        }
+        if (temp == null){System.out.println("No comments found");}
+        else {
+            ArrayList<AbstractMap.SimpleEntry<comment, LocalDateTime>> pairs = new ArrayList<>();
+            for (comment comment: temp){
+                pairs.add(new AbstractMap.SimpleEntry<>(comment, comment.getReleaseDate()));
+            }
+            pairs.sort(java.util.Map.Entry.comparingByValue());
+            for (AbstractMap.SimpleEntry<comment, LocalDateTime> pair: pairs){
+                System.out.println(userService.getById(pair.getKey().getUserId()).getUsername() + ": " + pair.getKey().getContent() + "\n");
+            }
+
+        }
     }
 }

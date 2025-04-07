@@ -9,18 +9,20 @@ public class song extends entity {
     private String Title;
     private String Lyric;
     private String Genre;
+    private String ArtistId;
     private LocalDateTime ReleaseDate;
     private int ViewsCount;
 
     public song() {}
 
-    public song(String albumId, String title, String lyric, String genre, LocalDateTime releaseDate, int viewsCount) {
+    public song(String albumId, String title, String lyric, String genre, LocalDateTime releaseDate, int viewsCount, String artistId) {
         this.AlbumId = albumId;
         this.Title = title;
         this.Lyric = lyric;
         this.Genre = genre;
         this.ReleaseDate = releaseDate;
         this.ViewsCount = viewsCount;
+        this.ArtistId = artistId;
     }
 
     public String getAlbumId() {return AlbumId;}
@@ -46,4 +48,8 @@ public class song extends entity {
     public String getGenre() {return Genre;}
 
     public void setGenre(String genre) {this.Genre = genre;}
+
+    public String getArtistId() {return ArtistId;}
+
+    public void setArtistId(String artistId) {this.ArtistId = artistId;}
 }

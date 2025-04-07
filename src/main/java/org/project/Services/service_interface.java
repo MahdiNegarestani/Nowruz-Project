@@ -7,6 +7,6 @@ public interface service_interface<S extends entity> {
     public S getById(String id);
     public void delete(S s);
     public void add(S s);
-    public void edit(S s);
+    public void edit(S s);  // have a problem, two param in argument
     public ArrayList<S> getAll();
 }

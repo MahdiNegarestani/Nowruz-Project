@@ -1,23 +1,28 @@
 package org.project.Services.Identity;
 
+import org.project.Enums.edit_lyric_status;
 import org.project.Services.*;
 import org.project.Entities.Identity.*;
+import org.project.Entities.Music.*;
 import org.project.DataStorage.dataStorage;
+import org.project.Services.Music.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class artistService implements service_interface<artist>, searchService_interface<artist> {
 
     private final dataStorage dataStorage;
+    private final songService songService;
 
     public artistService(dataStorage dataStorage) {
         this.dataStorage = dataStorage;
+        this.songService = new songService(dataStorage);
     }
 
     public artist getById(String id) {
         for (account account: dataStorage.Accounts){
             if (account instanceof artist){
-                if (id == account.getUsername()){
+                if (Objects.equals(id, account.getId())){
                     return (artist) account;
                 }
             }
@@ -57,5 +62,77 @@ public class artistService implements service_interface<artist>, searchService_i
             }
         }
         return all;
+    }
+
+    public void editSong(song song, String editLyric, artist current_) {
+        if (Objects.equals(song.getArtistId(), current_.getId())){
+            song.setLyrics(editLyric);
+        } else {
+            System.out.println("Song does not exist in your songsList");
+        }
+    }
+
+    public void showListOfSongs(artist current_) {
+        int i = 1;
+        for (song song: current_.getSongsList()){
+            System.out.println(i + ". " + song.getTitle());
+            i ++;
+        }
+    }
+
+    public void showListOfAlbums(artist current_) {
+        int i = 1;
+        for (album album: current_.getAlbumsList()){
+            System.out.println(i + ". " + album.getTitle());
+            i ++;
+        }
+    }
+
+    public void addingSuggestedLyric(edit_lyric_suggested lyricSuggested, artist current_) {
+        current_.getLyricSuggestedList().add(lyricSuggested);
+    }
+
+    public void showListOfLyrics(artist current_) {
+        int i = 1;
+        for (edit_lyric_suggested suggested: current_.getLyricSuggestedList()){
+            System.out.println(i + ". " + this.songService.getById(suggested.getSongId()).getTitle());
+        }
+    }
+
+    public void approvingSuggestedLyric(edit_lyric_suggested suggested, artist current_) {
+        if (Objects.equals(songService.getById(suggested.getSongId()).getArtistId(), current_.getId())){
+            suggested.setEditLyricsSuggestStatus(edit_lyric_status.APPROVED);
+            songService.getById(suggested.getSongId()).setLyrics(suggested.getLyrics());
+        } else {
+            System.out.println("Song does not exist in your songsList");
+        }
+    }
+
+    public void rejectingSuggestedLyric(edit_lyric_suggested suggested, artist current_) {
+        if (Objects.equals(songService.getById(suggested.getSongId()).getArtistId(), current_.getId())){
+            suggested.setEditLyricsSuggestStatus(edit_lyric_status.REJECTED);
+        } else {
+            System.out.println("Song does not exist in your songsList");
+        }
+    }
+
+    public void createNewSong(String title, String genre, String albumId, String lyric, artist current_) {
+        song newSong = current_.createNewSong(title, genre, albumId, lyric);
+        this.dataStorage.Songs.add(newSong);
+    }
+
+    public void createNewAlbum(String title, ArrayList<song> trackList, artist current_) {
+        album newAlbum = current_.createNewAlbum(title, trackList);
+        this.dataStorage.Albums.add(newAlbum);
+    }
+
+    public void addSongToAlbum(song song, artist current_) {
+        current_.getSongsList().add(song);
+
+    }
+
+    public void viewTheSong(song song) {
+        System.out.println("Title: " + song.getTitle() + "\nGenre: " + song.getGenre() + "\nArtist_Name: " + this.getById(song.getArtistId()).getName() + "\nLyric: " + song.getLyrics());
+        song.incrementViewsCount();
     }
 }

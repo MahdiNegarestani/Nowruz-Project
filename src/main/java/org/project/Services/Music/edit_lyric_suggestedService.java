@@ -27,11 +27,11 @@ public class edit_lyric_suggestedService implements service_interface<edit_lyric
     }
 
     public void edit(edit_lyric_suggested u) {
-        dataStorage.EditLyricsSuggests.set(dataStorage.CommentReactions.indexOf(u), u);
+        dataStorage.EditLyricsSuggests.set(dataStorage.EditLyricsSuggests.indexOf(u), u);
     }
 
     public void delete(edit_lyric_suggested u) {
-        dataStorage.CommentReactions.remove(u);
+        dataStorage.EditLyricsSuggests.remove(u);
     }
 
     public ArrayList<edit_lyric_suggested> getAll() {
