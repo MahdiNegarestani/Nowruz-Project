@@ -6,7 +6,7 @@ import org.project.IDR;
 
 public interface accountManager_interface {
     boolean checkUsernameAvailability(String username);
-    IDR register(account account, String password);
+    IDR signup(String name, String username, String password, String email, int age, roles role);
     account Login(String username, String password);
     void EditAccount(account account);
     void DeleteAccount(String accountId);

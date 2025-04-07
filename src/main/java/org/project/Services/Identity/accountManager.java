@@ -2,6 +2,8 @@ package org.project.Services.Identity;
 
 import org.project.DataStorage.dataStorage;
 import org.project.Entities.Identity.account;
+import org.project.Entities.Identity.*;
+import org.project.Enums.roles;
 import org.project.IDR;
 
 
@@ -23,12 +25,17 @@ public class accountManager implements accountManager_interface{
         for (account account:dataStorage.Accounts){
             if (username.equals(account.getUsername())){return account;}
         }
+        System.out.println("invalid username");
         return null;
     }
 
     public account Login(String username, String password) {
         account account = GetAccountByUsername(username);
-        return account;
+        if (password.equals(account.getPassword())){return account;}
+        else {
+            System.out.println("Wrong password");
+            return null;
+        }
     }
 
     public account GetAccountById(String accountId) {
@@ -52,13 +59,26 @@ public class accountManager implements accountManager_interface{
         }
     }
 
-    public IDR register(account account, String password){
-        if (!checkUsernameAvailability(account.getUsername())){
+    public IDR signup(String name, String username, String password, String email, int age, roles role){
+        if (!checkUsernameAvailability(username)){
             return IDR.creatFailedIDR("username is already taken");
         }
+        account account = null;
+        switch (role) {
+            case USER: {account = new user();
+                break;}
+            case ADMIN: {account = new admin();
+                break;}
+            case ARTIST: {account = new artist();
+                break;}
+        }
         account.setPassword(password);
-        dataStorage.Accounts.add(account);
-        return IDR.creatSeccesIDR("Account successfully registered!");
+        account.setUsername(username);
+        account.setEmail(email);
+        account.setAge(age);
+        account.setName(name);
+        dataStorage.AccountsRegisterd.add(account);
+        return IDR.creatSeccesIDR("Account successfully registered! waiting for approval");
     }
 
     public IDR ChangePassword(String accountId, String newPassword) {

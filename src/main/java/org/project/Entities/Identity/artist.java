@@ -13,7 +13,10 @@ public class artist extends account {
     private ArrayList<album> albumsList;
     private ArrayList<edit_lyric_suggested> lyricSuggestedList;
 
-    public artist() {Role = roles.ARTIST;}
+    public artist() {
+        super();
+        Role = roles.ARTIST;
+    }
 
     public artist(String name, String username, String password, String email, int age, roles role) {
         super(name, username, password, email, age, role);

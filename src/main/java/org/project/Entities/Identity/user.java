@@ -8,7 +8,10 @@ public class user extends account {
 
     private final artistsFollowing artistsFollowing = new artistsFollowing();
 
-    public user() {Role = roles.USER;}
+    public user() {
+        super();
+        Role = roles.USER;
+    }
 
     public user(String name, String username, String password, String email, int age, roles role) {
         super(name, username, password, email, age, role);

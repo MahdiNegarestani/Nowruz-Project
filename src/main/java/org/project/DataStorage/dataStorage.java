@@ -12,4 +12,5 @@ public class dataStorage {
     public ArrayList<comment_reaction> CommentReactions = new ArrayList<>();
     public ArrayList<edit_lyric_suggested> EditLyricsSuggests = new ArrayList<>();
     public ArrayList<song> Songs = new ArrayList<>();
+    public ArrayList<account> AccountsRegisterd = new ArrayList<>();
 }
