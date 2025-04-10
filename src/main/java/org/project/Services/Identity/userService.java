@@ -2,7 +2,6 @@ package org.project.Services.Identity;
 
 import org.project.Entities.Music.song;
 import org.project.Services.*;
-import org.project.Services.Identity.artistService;
 import org.project.Entities.Identity.*;
 import org.project.Entities.Music.*;
 import org.project.DataStorage.dataStorage;
@@ -130,5 +129,19 @@ public class userService implements service_interface<user>, searchService_inter
     public void viewTheSong(song song) {
         System.out.println("Title: " + song.getTitle() + "\nGenre: " + song.getGenre() + "\nArtist_Name: " + artistService.getById(song.getArtistId()).getName() + "\nLyric: " + song.getLyrics());
         song.incrementViewsCount();
+    }
+
+    public ArrayList<artist> showFollowingArtistsNames(user current_) {
+        ArrayList<String> artistsId = current_.getArtistsFollowing().getArtistsId();
+        ArrayList<artist> temp = new ArrayList<>();
+        for (String artistId: artistsId){
+            temp.add(artistService.getById(artistId));
+        }
+        int i = 1;
+        for (artist artist: temp){
+            System.out.println(i + " . " + artist.getName());
+            i ++;
+        }
+        return temp;
     }
 }

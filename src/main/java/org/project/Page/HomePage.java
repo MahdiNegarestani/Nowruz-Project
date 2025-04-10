@@ -1,6 +1,7 @@
 package org.project.Page;
 
 import org.project.Page.page_abstract.*;
+import org.project.DataStorage.dataStorage;
 
 import java.util.Scanner;
 
@@ -8,10 +9,12 @@ public class HomePage extends page {
 
     private final Scanner scanner;
     private final router router;
+    private final dataStorage dataStorage;
 
-    public HomePage(Scanner scanner, router router) {
+    public HomePage(Scanner scanner, router router, dataStorage dataStorage) {
         this.scanner = scanner;
         this.router = router;
+        this.dataStorage = dataStorage;
     }
 
     public void Initialize() {setName("HomePage");}

@@ -11,7 +11,10 @@ public class user extends account {
     public user() {
         super();
         Role = roles.USER;
+        this.artistsFollowing.setUserId(getId());
     }
+
+    public artistsFollowing getArtistsFollowing() {return this.artistsFollowing;}
 
     public user(String name, String username, String password, String email, int age, roles role) {
         super(name, username, password, email, age, role);

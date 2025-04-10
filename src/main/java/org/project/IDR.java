@@ -21,5 +21,4 @@ public class IDR {
     public static IDR creatFailedIDR(String message){
         return new IDR(false, message);
     }
-
 }
