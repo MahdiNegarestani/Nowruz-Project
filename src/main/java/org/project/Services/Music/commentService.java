@@ -69,7 +69,7 @@ public class commentService implements service_interface<comment>, searchService
             }
             pairs.sort(java.util.Map.Entry.comparingByValue());
             for (AbstractMap.SimpleEntry<comment, LocalDateTime> pair: pairs){
-                System.out.println(userService.getById(pair.getKey().getUserId()).getUsername() + ": " + pair.getKey().getContent() + "\n");
+                System.out.println(userService.getById(pair.getKey().getUserId()).getUsername() + " (ReleaseDate: " + pair.getValue() + ") " + ": " + pair.getKey().getContent() + "\n");
             }
 
         }

@@ -121,14 +121,9 @@ public class userService implements service_interface<user>, searchService_inter
         return albumResult;
     }
 
-    public void creatComments(song song, String comment, user current_) {
+    public void creatComments(song song, String comment, account current_) {
         comment commentResult = current_.leaveComment(song, comment);
         this.dataStorage.Comments.add(commentResult);
-    }
-
-    public void viewTheSong(song song) {
-        System.out.println("Title: " + song.getTitle() + "\nGenre: " + song.getGenre() + "\nArtist_Name: " + artistService.getById(song.getArtistId()).getName() + "\nLyric: " + song.getLyrics());
-        song.incrementViewsCount();
     }
 
     public ArrayList<artist> showFollowingArtistsNames(user current_) {

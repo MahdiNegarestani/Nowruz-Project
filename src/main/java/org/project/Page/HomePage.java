@@ -2,6 +2,7 @@ package org.project.Page;
 
 import org.project.Page.page_abstract.*;
 import org.project.DataStorage.dataStorage;
+import org.project.Entities.Identity.account;
 
 import java.util.Scanner;
 
@@ -21,8 +22,8 @@ public class HomePage extends page {
 
     public void showContent() {
         while (true) {
-            System.out.println("1. Login");
-            System.out.println("2. SignUp");
+            System.out.println("1. LoginPage");
+            System.out.println("2. SignupPage");
             System.out.print("enter the desired route: ");
 
             String input = scanner.nextLine();

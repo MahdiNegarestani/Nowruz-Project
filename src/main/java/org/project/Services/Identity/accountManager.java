@@ -33,7 +33,7 @@ public class accountManager implements accountManager_interface{
         account account = GetAccountByUsername(username);
         if (password.equals(account.getPassword())){return account;}
         else {
-            System.out.println("Wrong password");
+            System.out.println("Wrong password! Try again");
             return null;
         }
     }

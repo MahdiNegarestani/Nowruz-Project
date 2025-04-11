@@ -31,7 +31,7 @@ public class SignupPage extends page {
             System.out.println("1. continue");
             System.out.println("2. back to Home Page");
             switch (scanner.nextInt()) {
-                case 2: {router.navigate("Home Page");}break;
+                case 2: {router.navigate("HomePage");}break;
                 case 1: {
                     while (true) {
                         System.out.println("Enter your Name: ");

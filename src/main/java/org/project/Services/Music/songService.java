@@ -1,12 +1,10 @@
 package org.project.Services.Music;
 
-import org.project.Entities.Identity.account;
-import org.project.Entities.Identity.admin;
 import org.project.Services.*;
 import org.project.Entities.Music.*;
 import org.project.DataStorage.dataStorage;
+import org.project.Services.Identity.artistService;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.AbstractMap;
@@ -14,9 +12,11 @@ import java.util.AbstractMap;
 public class songService implements service_interface<song>, searchService_interface<song> {
 
     dataStorage dataStorage;
+    artistService artistService;
 
     public songService(dataStorage dataStorage) {
         this.dataStorage = dataStorage;
+        artistService = new artistService(dataStorage);
     }
 
     public song getById(String id) {
@@ -54,17 +54,24 @@ public class songService implements service_interface<song>, searchService_inter
         return all;
     }
 
-    public ArrayList<AbstractMap.SimpleEntry<song, Integer>> listOfTopSongs() {
+    public ArrayList<AbstractMap.SimpleEntry<song, Integer>> charts() {
         if (getAll() == null){return null;}
         else {
             ArrayList<AbstractMap.SimpleEntry<song, Integer>> pairs = new ArrayList<>();
             for (song song: dataStorage.Songs){
                 pairs.add(new AbstractMap.SimpleEntry<>(song, song.getViewsCount()));
             }
+            int i = 1;
             for (AbstractMap.SimpleEntry<song, Integer> pair: pairs){
-                System.out.println(pair.getKey().getTitle() + " with " + pair.getValue() + " views");
+                System.out.println(i + ". " + pair.getKey().getTitle() + " with " + pair.getValue() + " views");
+                i ++;
             }
             return pairs;
         }
+    }
+
+    public void viewTheSong(song song) {
+        System.out.println("Title: " + song.getTitle() + "\nGenre: " + song.getGenre() + "\nArtist_Name: " + artistService.getById(song.getArtistId()).getName() + "\nLyric: " + song.getLyrics());
+        song.incrementViewsCount();
     }
 }

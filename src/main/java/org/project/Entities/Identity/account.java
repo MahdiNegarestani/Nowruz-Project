@@ -1,9 +1,11 @@
 package org.project.Entities.Identity;
 
-import org.project.Entities.entity;
+import org.project.Entities.Music.comment;
 import org.project.Entities.Music.song;
-
+import org.project.Entities.entity;
 import org.project.Enums.*;
+
+import java.time.LocalDateTime;
 
 public class account extends entity{
     protected String Name;
@@ -45,4 +47,13 @@ public class account extends entity{
     public void setAge(int Age) {this.Age = Age;}
 
     public roles getRole() {return this.Role;}
+
+    public comment leaveComment(song song, String comment) {
+        comment comment1 = new comment();
+        comment1.setContent(comment);
+        comment1.setUserId(getId());
+        comment1.setSongId(song.getId());
+        comment1.setReleaseDate(LocalDateTime.now());
+        return comment1;
+    }
 }
