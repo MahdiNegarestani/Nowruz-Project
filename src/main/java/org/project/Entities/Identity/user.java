@@ -14,11 +14,11 @@ public class user extends account {
         this.artistsFollowing.setUserId(getId());
     }
 
-    public artistsFollowing getArtistsFollowing() {return this.artistsFollowing;}
-
     public user(String name, String username, String password, String email, int age, roles role) {
         super(name, username, password, email, age, role);
     }
+
+    public artistsFollowing getArtistsFollowing() {return this.artistsFollowing;}
 
     public edit_lyric_suggested suggestEdit(song song, String suggestedLyric) {
         edit_lyric_suggested suggested = new edit_lyric_suggested();
