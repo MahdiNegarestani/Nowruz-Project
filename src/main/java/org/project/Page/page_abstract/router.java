@@ -7,7 +7,7 @@ public class router {
 
     private static final Map<String, page> routeMap = new HashMap<>();
     private page currentPage;
-    private String indexRoute = "Home";
+    private String indexRoute = "HomePage";
 
     public String getIndexRoute() {
         return indexRoute;

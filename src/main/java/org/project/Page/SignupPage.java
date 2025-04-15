@@ -81,7 +81,7 @@ public class SignupPage extends page {
                             if (message.equals("username is already taken")) {
                                 System.out.println(message + "\nEnter another Username: ");
                                 String newUsername = scanner.nextLine();
-                                IDR = accountManager.signup(newUsername, username, password, email, age, role);
+                                IDR = accountManager.signup(name, newUsername, password, email, age, role);
                                 message = IDR.getMessage();
                             } else {break;}
                         }

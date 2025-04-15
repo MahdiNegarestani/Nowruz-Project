@@ -24,6 +24,7 @@ public class Main {
         app.getRouter().addRoute("HomePage",new HomePage(scanner, app.getRouter(), dataStorage));
         app.getRouter().addRoute("SignupPage",new SignupPage(scanner, app.getRouter(), dataStorage));
         app.getRouter().addRoute("LoginPage",new LoginPage(scanner, app.getRouter(), dataStorage));
+        app.getRouter().addRoute("SongPage",new SongPage(scanner, app.getRouter(), dataStorage));
     }
 
     public static void main(String[] args) {

@@ -41,13 +41,15 @@ public class LoginPage extends page {
                         System.out.println("Enter your password");
                         String password = scanner.next();
                         account account1 = accountManager.Login(username, password);
-                        if (account1 == null) {continue;}
-                        System.out.println("You want to continue or back to Home Page");
-                        System.out.println("1. continue");
-                        System.out.println("2. back to Home Page");
-                        switch (scanner.nextInt()) {
-                            case 2: {router.navigate("HomePage");}break;
-                            case 1: {break;}
+                        if (account1 == null) {
+                            System.out.println("You want to continue or back to Home Page");
+                            System.out.println("1. continue");
+                            System.out.println("2. back to Home Page");
+                            switch (scanner.nextInt()) {
+                                case 2: {router.navigate("HomePage");}break;
+                                case 1: {break;}
+                            }
+                            continue;
                         }
                         switch (account1.getRole()) {
                             case USER: {

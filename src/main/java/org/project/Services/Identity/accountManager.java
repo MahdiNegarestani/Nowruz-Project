@@ -31,7 +31,8 @@ public class accountManager implements accountManager_interface{
 
     public account Login(String username, String password) {
         account account = GetAccountByUsername(username);
-        if (password.equals(account.getPassword())){return account;}
+        if (account == null) {return null;}
+        else if (password.equals(account.getPassword())){return account;}
         else {
             System.out.println("Wrong password! Try again");
             return null;
@@ -60,7 +61,7 @@ public class accountManager implements accountManager_interface{
     }
 
     public IDR signup(String name, String username, String password, String email, int age, roles role){
-        if (!checkUsernameAvailability(username)){
+        if (checkUsernameAvailability(username)){
             return IDR.creatFailedIDR("username is already taken");
         }
         account account = null;

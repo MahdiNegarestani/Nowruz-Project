@@ -30,10 +30,10 @@ public class HomePage extends page {
 
             switch (input) {
                 case "1":
-                    router.navigate("Login");
+                    router.navigate("LoginPage");
                     return;
                 case "2":
-                    router.navigate("Signup");
+                    router.navigate("SignupPage");
                     return;
                 default:
                     router.navigate(input);
