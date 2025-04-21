@@ -1,6 +1,8 @@
 package org.project.Services.Music;
 
 import java.time.LocalDateTime;
+
+import org.project.Main;
 import org.project.Services.*;
 import org.project.Services.Identity.userService;
 import org.project.Entities.Music.*;
@@ -12,12 +14,8 @@ import java.util.AbstractMap;
 public class commentService implements service_interface<comment>, searchService_interface<comment> {
 
     private dataStorage dataStorage;
-    private userService userService;
 
-    public commentService(dataStorage dataStorage) {
-        this.dataStorage = dataStorage;
-        this.userService = new userService(dataStorage);
-    }
+    public commentService(dataStorage dataStorage) {this.dataStorage = dataStorage;}
 
     public comment getById(String id) {
         for (comment comment: dataStorage.Comments){
@@ -69,7 +67,7 @@ public class commentService implements service_interface<comment>, searchService
             }
             pairs.sort(java.util.Map.Entry.comparingByValue());
             for (AbstractMap.SimpleEntry<comment, LocalDateTime> pair: pairs){
-                System.out.println(userService.getById(pair.getKey().getUserId()).getUsername() + " (ReleaseDate: " + pair.getValue() + ") " + ": " + pair.getKey().getContent() + "\n");
+                System.out.println(Main.getServices.getUserService().getById(pair.getKey().getUserId()).getUsername() + " (ReleaseDate: " + pair.getValue() + ") " + ": " + pair.getKey().getContent() + "\n");
             }
 
         }

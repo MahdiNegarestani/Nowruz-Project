@@ -1,6 +1,7 @@
 package org.project.Services.Identity;
 
 import org.project.Entities.Music.song;
+import org.project.Main;
 import org.project.Services.*;
 import org.project.Entities.Identity.*;
 import org.project.Entities.Music.*;
@@ -11,12 +12,8 @@ import java.util.Objects;
 public class userService implements service_interface<user>, searchService_interface<user> {
 
     private final dataStorage dataStorage;
-    private final artistService artistService;
 
-    public userService(dataStorage dataStorage) {
-        this.dataStorage = dataStorage;
-        this.artistService = new artistService(dataStorage);
-    }
+    public userService(dataStorage dataStorage) {this.dataStorage = dataStorage;}
 
     public user getById(String id) {
         for (account account: dataStorage.Accounts){
@@ -130,7 +127,7 @@ public class userService implements service_interface<user>, searchService_inter
         ArrayList<String> artistsId = current_.getArtistsFollowing().getArtistsId();
         ArrayList<artist> temp = new ArrayList<>();
         for (String artistId: artistsId){
-            temp.add(artistService.getById(artistId));
+            temp.add(Main.getServices.getArtistService().getById(artistId));
         }
         int i = 1;
         for (artist artist: temp){

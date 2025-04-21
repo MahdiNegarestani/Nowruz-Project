@@ -10,7 +10,7 @@ public class HomePage extends page {
 
     private final Scanner scanner;
     private final router router;
-    private final dataStorage dataStorage;
+    dataStorage dataStorage;
 
     public HomePage(Scanner scanner, router router, dataStorage dataStorage) {
         this.scanner = scanner;
@@ -24,6 +24,8 @@ public class HomePage extends page {
         while (true) {
             System.out.println("1. LoginPage");
             System.out.println("2. SignupPage");
+            System.out.println("3. SongPage");
+            System.out.println("4. UserPage");
             System.out.print("enter the desired route: ");
 
             String input = scanner.nextLine();
@@ -34,6 +36,12 @@ public class HomePage extends page {
                     return;
                 case "2":
                     router.navigate("SignupPage");
+                    return;
+                case "3":
+                    router.navigate("SongPage");
+                    return;
+                case "4":
+                    router.navigate("UserPage");
                     return;
                 default:
                     router.navigate(input);

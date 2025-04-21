@@ -1,22 +1,20 @@
 package org.project.Services.Identity;
 
 import org.project.Enums.edit_lyric_status;
+import org.project.Main;
 import org.project.Services.*;
 import org.project.Entities.Identity.*;
 import org.project.Entities.Music.*;
 import org.project.DataStorage.dataStorage;
-import org.project.Services.Music.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class artistService implements service_interface<artist>, searchService_interface<artist> {
 
     private final dataStorage dataStorage;
-    private final songService songService;
 
     public artistService(dataStorage dataStorage) {
         this.dataStorage = dataStorage;
-        this.songService = new songService(dataStorage);
     }
 
     public artist getById(String id) {
@@ -95,21 +93,21 @@ public class artistService implements service_interface<artist>, searchService_i
     public void showListOfLyrics(artist current_) {
         int i = 1;
         for (edit_lyric_suggested suggested: current_.getLyricSuggestedList()){
-            System.out.println(i + ". " + this.songService.getById(suggested.getSongId()).getTitle());
+            System.out.println(i + ". " + Main.getServices.getSongService().getById(suggested.getSongId()).getTitle());
         }
     }
 
     public void approvingSuggestedLyric(edit_lyric_suggested suggested, artist current_) {
-        if (Objects.equals(songService.getById(suggested.getSongId()).getArtistId(), current_.getId())){
+        if (Objects.equals(Main.getServices.getSongService().getById(suggested.getSongId()).getArtistId(), current_.getId())){
             suggested.setEditLyricsSuggestStatus(edit_lyric_status.APPROVED);
-            songService.getById(suggested.getSongId()).setLyrics(suggested.getLyrics());
+            Main.getServices.getSongService().getById(suggested.getSongId()).setLyrics(suggested.getLyrics());
         } else {
             System.out.println("Song does not exist in your songsList");
         }
     }
 
     public void rejectingSuggestedLyric(edit_lyric_suggested suggested, artist current_) {
-        if (Objects.equals(songService.getById(suggested.getSongId()).getArtistId(), current_.getId())){
+        if (Objects.equals(Main.getServices.getSongService().getById(suggested.getSongId()).getArtistId(), current_.getId())){
             suggested.setEditLyricsSuggestStatus(edit_lyric_status.REJECTED);
         } else {
             System.out.println("Song does not exist in your songsList");

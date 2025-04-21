@@ -1,9 +1,9 @@
 package org.project.Services.Music;
 
+import org.project.Main;
 import org.project.Services.*;
 import org.project.Entities.Music.*;
 import org.project.DataStorage.dataStorage;
-import org.project.Services.Identity.artistService;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -12,12 +12,8 @@ import java.util.AbstractMap;
 public class songService implements service_interface<song>, searchService_interface<song> {
 
     dataStorage dataStorage;
-    artistService artistService;
 
-    public songService(dataStorage dataStorage) {
-        this.dataStorage = dataStorage;
-        artistService = new artistService(dataStorage);
-    }
+    public songService(dataStorage dataStorage) {this.dataStorage = dataStorage;}
 
     public song getById(String id) {
         for (song song: dataStorage.Songs){
@@ -71,7 +67,7 @@ public class songService implements service_interface<song>, searchService_inter
     }
 
     public void viewTheSong(song song) {
-        System.out.println("Title: " + song.getTitle() + "\nGenre: " + song.getGenre() + "\nArtist_Name: " + artistService.getById(song.getArtistId()).getName() + "\nLyric: " + song.getLyrics());
+        System.out.println("Title: " + song.getTitle() + "\nGenre: " + song.getGenre() + "\nArtist_Name: " + Main.getServices.getArtistService().getById(song.getArtistId()).getName() + "\nLyric: " + song.getLyrics());
         song.incrementViewsCount();
     }
 }
